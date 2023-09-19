@@ -3,12 +3,15 @@
   "version": "1.0.0",
   "description": "I'm learing about npm",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Rishabh0262",
   "license": "ISC",
   "dependencies": {
-    "sillyname": "^0.1.0"
+    "sillyname": "^0.1.0",
+    "superhero": "^2.13.6",
+    "superheroes": "^3.0.0"
   }
 }

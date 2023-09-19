@@ -1,5 +1,19 @@
-var randomGenerator = require("sillyname")
+// var randomGenerator = require("sillyname")
+import randomGenerator from 'sillyname'
+import superHeroes from "superheroes"
 
 var name = randomGenerator()
 
-console.log(`My name is ${name}`)
+// console.log(`My name is ${name}`)
+
+var heroName = superHeroes.random();
+
+console.log("I am " + heroName)
+
+
+
+
+
+
+
+
