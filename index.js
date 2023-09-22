@@ -13,23 +13,32 @@ app.get("/", (req, res) => {
   res.send("<h1>Home Page</h1>");
 });
 
+
+// we passed the parameters to post the data we wanted to post to the server/BE
 app.post("/register", (req, res) => {
   //Do something with the data
   res.sendStatus(201);
 });
 
+// We replace that data from the matching argument from the url...
+//    with the data se have passed in the params in postman. It changes the complete document(mongodb).
 app.put("/user/angela", (req, res) => {
   res.sendStatus(200);
 });
 
+
+// It just change one of the parameter that we wanted to fill in. with the matching parameters from the URL.
 app.patch("/user/angela", (req, res) => {
   res.sendStatus(200);
 });
 
+
+// It just deletes the  matching parameter
 app.delete("/user/angela", (req, res) => {
-  //Deleting
+  // Deleting 
   res.sendStatus(200);
 });
+
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
