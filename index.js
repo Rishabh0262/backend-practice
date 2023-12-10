@@ -16,10 +16,24 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
   //Step 1 - Make the get route work and render the index.ejs file.
+  res.render("index.ejs")
+
 });
 
 app.post("/submit", (req, res) => {
   //Step 2 - Make the generate name functionality work
+
+  var n1 = adj.length;
+  var n2 = noun.length;
+  
+
+  var adj1 = adj[Math.floor(Math.random() * n1)];
+  var noun1 = noun[Math.floor(Math.random() * n2)];
+
+  var randomName = adj1 + " " + noun1;
+  console.log(randomName)
+  res.render("index.ejs", {name : randomName})
+
   //Hint: When the "Generate Name" button in index.ejs is clicked, it should hit up this route.
   //Then:
   //1. You should randomly pick an adjective from the const "adj" and a noun from const "noun",
