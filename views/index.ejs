@@ -19,12 +19,27 @@
     <!-- If no recipe yet, show: -->
     <h2>Pick your favourite taco ingredient 👆</h2>
     <!-- Else, show the recipe name e.g. <h2>Recipe name</h2>-->
-
+    <h2><%= dataVal.name %></h2>
     <h3>Ingredients:</h3>
     <ul id="ingredientsList">
-      <li>Protein name, protein preparation</li>
-      <li>Salsa name</li>
-      <li>Every other topping</li>
+      <%# var protein = ''  %>
+      <li><%= dataVal.ingredients.protein.name  %> </li>
+      <li><%= dataVal.ingredients.salsa.name %></li>
+      <% 
+      // for (let topping in dataVal.ingredients.toppings) { 
+        const topping = dataVal.ingredients.toppings;
+
+        console.log(topping)
+        const toppingsLen = topping.length;
+        for (let i =0; i<toppingsLen; i++) {
+
+        
+        %>
+
+        <li> <%= topping[i].quantity %> of <%= topping[i].name %> </li>
+
+      
+      <% } %>
     </ul>
 
 

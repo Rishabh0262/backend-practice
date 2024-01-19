@@ -18,9 +18,41 @@ app.get("/", (req, res) => {
 
 app.post("/recipe", (req, res) => {
   //Step 3: Write your code here to make this behave like the solution website.
+  const data = JSON.parse(recipeJSON)
+  console.table(data);
+  // console.log("Sent the file.")
+  console.log(req.body)
+  const choice = req.body.choice;
+  var dataVal
+  if (choice == "chicken") {
+    dataVal = data[0]
+  }
+  else if (choice == "beef")
+  {
+    dataVal = data[1]
+  }
+  else {  dataVal = data[2] }
+
+  res.render('index.ejs', {dataVal : dataVal})
+
   //Step 4: Add code to views/index.ejs to use the recieved recipe object.
 });
 
 app.listen(port, () => {
   console.log(`Server running on port: ${port}`);
 });
+
+
+
+/* 
+
+  Chicken Taco
+  Ingredients:
+  Chicken, Grilled
+  Tomato Salsa
+  1 cup of Lettuce
+  1/2 cup of Cheese
+  2 tablespoons of Guacamole
+  2 tablespoons of Sour Cream
+
+*/
