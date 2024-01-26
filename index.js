@@ -15,7 +15,8 @@ app.get("/", async (req, res) => {
   try {
     const response = await axios.get("https://bored-api.appbrewery.com/random");
     const result = response.data;
-    res.render("index.ejs", { data: result });
+    console.log("response from API",result)
+    res.render("index.ejs", { data: result, error : 0, data1 : 0 });
   } catch (error) {
     console.error("Failed to make request:", error.message);
     res.render("index.ejs", {
@@ -25,7 +26,20 @@ app.get("/", async (req, res) => {
 });
 
 app.post("/", async (req, res) => {
-  console.log(req.body);
+  console.log(req.body.type, req.body.participants);
+  // const response = await axios.get()
+  try {
+    // const response = await axios.get("https://bored-api.appbrewery.com/filter?type=",req.body.type, "&participants=",req.body.participants)
+    const response = await axios.get(`https://bored-api.appbrewery.com/filter?type=${req.body.type}&participants=${req.body.participants}`)
+    const num = Math.floor(Math.random() * response.data.length)
+    // console.table("filter endpoint URL : ", response)
+    const result = response.data[num];
+    console.log("response from filter API", result );
+    res.render("index.ejs", {data1 : result, error : 0 , data : 0})
+  }catch (error) {
+    console.error("fialed to make request : ", error.message)
+    res.render("index.ejs", {error : error.message})
+  }
 
   // Step 2: Play around with the drop downs and see what gets logged.
   // Use axios to make an API request to the /filter endpoint. Making
@@ -40,3 +54,6 @@ app.post("/", async (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on port: ${port}`);
 });
+
+
+
