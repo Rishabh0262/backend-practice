@@ -24,6 +24,23 @@
       cursor: pointer;
     }
 
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td,
+    th {
+      border: 1px solid #161616;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+
     #noAuth {
       background-color: #3498db;
     }
@@ -56,7 +73,36 @@
 
   <div class="response-area">
     <p>
-      <%=content%>
+      <% const data=locals.data %>
+        <% console.table(locals.data) %>
+          <%= content %>
+            <!-- <table>
+              <tr>
+                <th>id</th>
+                <th>secret</th>
+                <th>emScore</th>
+                <th>username</th>
+                <th>timestamp</th>
+              </tr>
+              <tr>
+                <td>
+                  <%= // data.id %>
+                </td>
+                <td>
+                  <%= // data.secret %>
+                </td>
+                <td>
+                  <%= // data.emScore %>
+                </td>
+                <td>
+                  <%= // data.username %>
+                </td>
+                <td>
+                  <%= // data.timestamp %>
+                </td>
+
+              </tr>
+            </table> -->
     </p>
   </div>
 </body>
