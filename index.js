@@ -8,20 +8,129 @@ const masterKey = "4VGP2DN-6EWM4SJ-N6FGRHV-Z3PR3TT";
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //1. GET a random joke
+app.get("/random", (req, res) => {
+  const randomJoke = Math.floor(Math.random() * jokes.length);
+  // console.log(`ID : ${randomJoke} , Entire value : ${jokes[randomJoke]}`)
+  res.json(jokes[randomJoke]);
+});
 
 //2. GET a specific joke
+app.get("/jokes/:id", (req, res) => {
+  //  My way... as the ID-order is similar to the index-order
+  const jokeFetched = jokes[req.params.id - 1];
+  console.log(typeof req.params.id);
+
+  //  But official shouldv'e done it like this...
+  // const getJoke = jokes.find((joke) => joke.id === req.params.id)
+  // res.json(getJoke)
+
+  res.json(jokeFetched);
+});
 
 //3. GET a jokes by filtering on the joke type
+app.get("/filter", (req, res) => {
+  const type = req.query.type;
+  // console.log(type)
+  let selectedJokes = [];
+  for (var i = 0; i < jokes.length; i++) {
+    if (jokes[i].jokeType == type) {
+      selectedJokes.push(jokes[i]);
+    }
+  }
+
+  res.json(selectedJokes);
+});
 
 //4. POST a new joke
+app.post("/jokes", (req, res) => {
+  const n = jokes.length;
+  const joke = {
+    id: jokes.length + 1,
+    jokeText: req.body.text,
+    jokeType: req.body.type,
+  };
+
+  jokes.push(joke);
+
+  console.log(jokes[n]);
+
+  res.json(joke);
+});
 
 //5. PUT a joke
+app.put("/jokes/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const text = req.body.text;
+  const type = req.body.type;
+
+  const n = jokes.length;
+
+  const searchedJoke = jokes.find((joke) => joke.id === id);
+  console.log("\njoke to be changed : " + searchedJoke);
+
+  for (var i = 0; i < n; i++) {
+    if (jokes[i].id === id) {
+      jokes[i].jokeText = text;
+      jokes[i].jokeType = type;
+    }
+  }
+
+  const changedJoke = jokes.find((joke) => joke.id === id);
+  console.log("\nchanged joke values : " + changedJoke);
+  res.json(changedJoke);
+});
 
 //6. PATCH a joke
 
+app.patch("/jokes/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const text = req.body.text;
+  const type = req.body.type;
+
+  // var fetchedIndex = jokes.findIndex((joke) =>  joke.id === id);
+  //  *******    OR    *******
+  var fetchedIndex = jokes.findIndex((joke) => {
+    joke.id === id;
+    return joke;
+  });
+
+  // console.log(fetchedIndex);                     // for debugging
+  if (text) {
+    jokes[fetchedIndex].jokeText = text;
+    // console.log("\ntext patch.\n" + text);       // for debugging
+  }
+  if (type) {
+    jokes[fetchedIndex].jokeType = type;
+    // console.log("\ntype patch.\n" + type);       // for debugging
+  }
+
+  res.json(jokes[fetchedIndex]);
+});
+
 //7. DELETE Specific joke
+app.delete("/jokes/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const fetchedIndex = jokes.findIndex((joke) => joke.id === id);
+  const joke = jokes[fetchedIndex];
+  if (fetchedIndex > -1) {
+    jokes.splice(fetchedIndex);
+  } else console.log("\nInvalid Index.");
+
+  res.json(joke);
+});
 
 //8. DELETE All jokes
+app.delete("/all", (req, res) => {
+  var n = jokes.length;
+  while (n != 0) {
+    jokes.pop();
+    // console.log(jokes.length)
+    n--;
+  }
+  // console.log(n + "\n")
+  res.send("okay... Deleted all the jokes.");
+  // res.json({"status" : "okay"})
+});
 
 app.listen(port, () => {
   console.log(`Successfully started server on port ${port}.`);
