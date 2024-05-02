@@ -1,0 +1,2 @@
+This file is created via 'fs'[file system] from NodeJS. 
+This content is written through index.js file
