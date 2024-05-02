@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
 app.use(bodyParser.urlencoded({extended : true}))
 
 app.post("/submit", (req, res)=> {
-  console.log(req.body)
+  console.log(req.body)             // So that it can be access by the "req.body"
 })
 
 //  on Postman : we used the URL : localhost:3000/submit ... POST : data via  Body : x-www-form-urlencoded
