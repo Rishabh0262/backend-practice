@@ -7,11 +7,11 @@ const API_URL = "https://secrets-api.appbrewery.com/";
 
 //TODO 1: Fill in your values for the 3 types of auth.
 
-
+// kindly re-register using API via Postman.
 const yourUsername = "rishabhgupta";
 const yourPassword = "grishabh";
-const yourAPIKey = "85ce2b99-35d1-4945-af64-fdbed16d10a8"
-const yourBearerToken = "42c13e80-6e57-445a-996b-4708bc52b9bf";
+const yourAPIKey = "e3a96564-083c-411c-833d-77bc23521a94"
+const yourBearerToken = "4fe344c8-8e84-4b41-9415-aba5e137c9cf";
 
 app.get("/",async (req, res) => {
   // const apiKeyData = await  axios.get("https://secrets-api.appbrewery.com/generate-api-key")
@@ -36,13 +36,16 @@ app.get("/noAuth",async (req, res) => {
 
 app.get("/basicAuth",async (req, res) => {
   //TODO 3: Write your code here to hit up the /all endpoint
-  const URL = "https://secrets-api.appbrewery.com/all?page=2";
+  const URL = "https://secrets-api.appbrewery.com/all";
 
   //Specify that you only want the secrets from page 2
   //HINT: This is how you can use axios to do basic auth:
   // https://stackoverflow.com/a/74632908
   // /*
   const result = await axios.get(URL, {
+      params : {
+        page : 2
+      },
       auth: {
         username: yourUsername,
         password: yourPassword,
